@@ -1,3 +1,14 @@
+modify this code to a satndard book store code with images and dropdowns 
+<!--
+Ztriad - Single-file HTML + CSS template
+Instructions to deploy on GitHub Pages:
+1. Create a new repository on GitHub named username.github.io (replace username with your GitHub username), or create any repo and enable Pages from the repository settings (gh-pages branch or main/docs folder).
+2. Add this file as index.html at the repository root (or in docs/ if using that option).
+3. Commit and push. GitHub Pages will publish the site (it may take a minute).
+
+NOTE: This template is intentionally self-contained (HTML + CSS + small JS). Replace images/book covers and text where needed.
+-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,11 +30,14 @@
       --max-width:1100px;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter, system-ui, sans-serif;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: linear-gradient(180deg,#081025 0%, #071126 45%);
       color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       line-height:1.5;
     }
     .wrap{max-width:var(--max-width);margin:28px auto;padding:20px}
@@ -35,22 +49,14 @@
     .logo{
       height:52px;width:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:white;font-size:20px
     }
-    .brand h1{margin:0;font-size:18px}
-    nav{display:flex;gap:14px;align-items:center;position:relative}
-    nav a, .dropbtn{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:15px}
-    nav a:hover, .dropdown:hover .dropbtn{color:white;background:var(--glass)}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.4px}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav a:hover{color:white;background:var(--glass)}
 
-    .dropdown{position:relative;display:inline-block}
-    .dropdown-content{
-      display:none;position:absolute;background:#1e293b;min-width:160px;border-radius:8px;z-index:10;box-shadow:0 8px 20px rgba(0,0,0,0.4);
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:26px
     }
-    .dropdown-content a{
-      color:#e6eef8;padding:10px 14px;text-decoration:none;display:block;font-size:14px;
-    }
-    .dropdown-content a:hover{background:#334155}
-    .dropdown:hover .dropdown-content{display:block}
-
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:26px}
     .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px}
     .eyebrow{color:var(--accent2);font-weight:600;font-size:13px}
     .hero h2{margin:8px 0 10px;font-size:34px}
@@ -63,14 +69,23 @@
     .books-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
     .book{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:14px;border-radius:12px;transition:transform .18s ease, box-shadow .18s ease}
     .book:hover{transform:translateY(-6px);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
-    .book-cover{height:200px;border-radius:8px;overflow:hidden}
-    .book-cover img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+    .book-cover{height:160px;border-radius:8px;background:linear-gradient(180deg,#111827,#0b1220);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
     .book h3{margin:10px 0 6px;font-size:16px}
     .meta{color:var(--muted);font-size:13px}
 
-    footer{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-    footer p{margin:4px 0;color:var(--muted)}
+    aside.contact{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:20px;border-radius:14px}
+    .contact h4{margin:0 0 10px}
+    .contact p{margin:6px 0;color:var(--muted)}
 
+    .features{display:flex;gap:14px;margin-top:22px}
+    .feature{flex:1;padding:14px;border-radius:12px;background:var(--card)}
+    .feature h5{margin:0 0 6px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    footer{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));display:flex;justify-content:space-between;align-items:center}
+    footer p{margin:0;color:var(--muted)}
+
+    /* Responsive */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr}
       .books-grid{grid-template-columns:repeat(2,1fr)}
@@ -82,6 +97,7 @@
       .logo{height:44px;width:44px}
       .hero h2{font-size:26px}
     }
+
   </style>
 </head>
 <body>
@@ -94,6 +110,106 @@
           <div style="font-size:12px;color:var(--muted)">Books • Stories • Community</div>
         </div>
       </div>
-      <nav>
+      <nav aria-label="Main navigation">
         <a href="#books">Books</a>
-        <div class
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#" class="btn btn-outline">Visit Store</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Welcome to Ztriad</div>
+        <h2>Curated books that spark curiosity and delight.</h2>
+        <p class="lead">Ztriad is an independent bookstore located in Chennai. Browse our curated collection, find staff picks, and join community events.</p>
+        <div class="cta">
+          <button class="btn btn-primary" onclick="document.getElementById('books').scrollIntoView({behavior:'smooth'})">Browse books</button>
+          <a class="btn btn-outline" href="mailto:admin@ztriad.com">Email us</a>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <h5>New Arrivals</h5>
+            <p>Handpicked recent releases across genres.</p>
+          </div>
+          <div class="feature">
+            <h5>Member Discounts</h5>
+            <p>Join our membership for monthly perks.</p>
+          </div>
+          <div class="feature">
+            <h5>Community Events</h5>
+            <p>Author talks, readings and workshops.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="contact" id="contact">
+        <h4>Visit or contact</h4>
+        <p><strong>Address</strong><br>Kalaimagal nagar 4th cross street, Ekkatuthangal, Chennai - 60032</p>
+        <p><strong>Phone</strong><br><a href="tel:+918012457203" style="color:inherit;text-decoration:none">+91 8012457203</a></p>
+        <p><strong>Email</strong><br><a href="mailto:admin@ztriad.com" style="color:inherit;text-decoration:none">admin@ztriad.com</a></p>
+        <div style="margin-top:10px;font-size:13px;color:var(--muted)">Store Hours: Tue–Sun • 10:30 — 19:30</div>
+      </aside>
+    </section>
+
+    <section id="books" style="margin-top:18px">
+      <h3 style="margin:0 0 12px">Featured books</h3>
+      <div class="books-grid">
+        <article class="book">
+          <div class="book-cover">Cover</div>
+          <h3>The Wandering Reader</h3>
+          <div class="meta">Fiction • ₹399</div>
+        </article>
+
+        <article class="book">
+          <div class="book-cover">Cover</div>
+          <h3>City of Quiet Stories</h3>
+          <div class="meta">Short stories • ₹299</div>
+        </article>
+
+        <article class="book">
+          <div class="book-cover">Cover</div>
+          <h3>Notes on Craft</h3>
+          <div class="meta">Non-fiction • ₹499</div>
+        </article>
+
+        <article class="book">
+          <div class="book-cover">Cover</div>
+          <h3>Children & Wonder</h3>
+          <div class="meta">Children • ₹250</div>
+        </article>
+
+        <article class="book">
+          <div class="book-cover">Cover</div>
+          <h3>Essays of the East</h3>
+          <div class="meta">Essays • ₹349</div>
+        </article>
+
+        <article class="book">
+          <div class="book-cover">Cover</div>
+          <h3>Mindful Reading</h3>
+          <div class="meta">Self-help • ₹279</div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>© <strong>Ztriad</strong> — Independent Bookstore</p>
+      <p style="color:var(--muted)">Email: <a href="mailto:admin@ztriad.com" style="color:inherit;text-decoration:none">admin@ztriad.com</a> • Phone: <a href="tel:+918012457203" style="color:inherit;text-decoration:none">8012457203</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Small accessibility improvement: smooth-scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      if(id){
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      }
+    }));
+  </script>
+</body>
+</html>
